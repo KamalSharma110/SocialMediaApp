@@ -1,0 +1,104 @@
+.auth-background{
+    background-color: #c3beff;
+    position: relative;
+    height: 757px;
+}
+
+.auth-form{
+    width: min(90vw, 900px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+    height: 470px;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.auth-form>div:nth-child(1){
+    padding: 40px;
+    padding-bottom: 0;
+    width: 100%;
+    color: #333333c9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-form>div:nth-child(1) h1{
+    font-size: 25px;
+}
+
+.auth-form>div:nth-child(1) *{
+    margin-bottom: 32px;
+}
+
+.auth-form form{
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form form input{
+    padding: 5px 5px 10px 5px;
+    border: none;
+    border-bottom: 2px solid #b9b5b526;
+    outline: none;
+}
+
+.auth-form__img{
+    width: 100%;
+    background-image: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)), url('https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=600');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    padding: 40px;
+}
+
+.auth-form__img h1{
+    font-size: 66px;
+}
+
+.auth-form__img *{
+    margin-bottom: 28px;
+}
+
+.auth-form button{
+    border: none;
+    background: none;
+    width: 50%;
+    font-weight: bold;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.auth-form>div:nth-child(1) button{
+    background-color: #807bcc;
+    color: white;
+}
+
+.auth-form__img button{
+    background-color: white;
+    color: #807bcc;
+}
+
+.auth-form__img--change-order{
+    order: -1;
+}
+
+.auth-form__img--change-img{
+    background-image: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)), url('https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600');
+}
+
+.auth-form .error{
+    font-size: 11px;
+    margin-top: -31px;
+    color: indianred;
+}
+
+.auth-form input:has(+ .error) {
+    border-bottom-color: indianred;
+}

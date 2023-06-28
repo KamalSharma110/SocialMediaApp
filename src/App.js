@@ -1,25 +1,30 @@
-import logo from './logo.svg';
+import { useContext, useEffect } from 'react';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+
 import './App.css';
+import AuthPage from './pages/AuthPage';
+import AuthContext from './context/auth-context';
+import { getExpirationTime } from './api/utils';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const authCtx = useContext(AuthContext);
+
+  useEffect(() => {
+    if(authCtx.isLoggedIn){
+      const expirationTime = getExpirationTime();
+
+      if(expirationTime <= 0) authCtx.logout();
+      else setTimeout(() => authCtx.logout(), expirationTime);
+    }
+  }, [authCtx]);
+
+  const router = createBrowserRouter([
+    { path: '/', element: <Navigate to='/auth' replace/> },
+    { path: '/auth', element: <AuthPage /> },
+    { path: '*', element: <Navigate to='/auth' replace/> },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
 export default App;
