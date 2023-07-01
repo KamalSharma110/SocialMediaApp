@@ -1,0 +1,62 @@
+.create-post{
+    background-color: white;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: auto;
+    font-size: .9rem;
+}
+
+.create-post form{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    row-gap: 1em;
+    color: #757675;
+    column-gap: 1.3em;
+}
+
+.create-post div{
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-post input[type="file"]{
+    display: none;
+}
+
+.create-post div img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.create-post div input{
+    width: 86%;
+    outline: none;
+    border: none;
+    background-color: #f4f3f4;
+}
+
+.create-post span{
+    line-height: 26px;
+    cursor: pointer;
+}
+
+.create-post span:has( + button){
+    justify-self: end;
+}
+
+.create-post button{
+    width: fit-content;
+    font-size: .75rem;
+    justify-self: end;
+}
+
+.create-post label{
+    grid-column: 1 / -1;
+    cursor: pointer;
+}
+
+

@@ -7,10 +7,10 @@ const getToken = () => {
   } else throw new Error("Unable to find the token");
 };
 
-const sendRequest = async (url, method, body, isAuthenticated = true) => {
+const sendRequest = async (url, method, body, isAuthenticated = true, isMultiPart = false) => {
   let headers = {};
 
-  if (method === "POST") headers["Content-Type"] = "application/json";
+  if (method === "POST" && !isMultiPart) headers["Content-Type"] = "application/json";
 
   if (isAuthenticated) {
     const token = getToken();
@@ -20,7 +20,7 @@ const sendRequest = async (url, method, body, isAuthenticated = true) => {
   const response = await fetch(url, {
     method: method,
     headers: headers,
-    body: JSON.stringify(body),
+    body: isMultiPart ? body : JSON.stringify(body),
   });
 
   const resData = await response.json();
@@ -45,4 +45,8 @@ export const signup = async(body) => {
 
 export const login = async(body) => {
   return await sendRequest(BASE_URL + '/auth/login', 'POST', body, false);
+};
+
+export const createPost = async(body) => {
+  return await sendRequest(BASE_URL + '/create-post', 'POST', body, true, true);
 };

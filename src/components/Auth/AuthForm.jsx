@@ -3,6 +3,7 @@ import { useContext, useRef, useState } from "react";
 import styles from "./AuthForm.module.css";
 import { login, signup } from "../../api/api";
 import AuthContext from "../../context/auth-context";
+import { useNavigate } from "react-router-dom";
 
 const AuthForm = () => {
   const [showLogin, setShowLogin] = useState(true);
@@ -14,6 +15,7 @@ const AuthForm = () => {
   const usernameRef = useRef();
 
   const authCtx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   let classes = styles["auth-form__img"];
   if (showLogin)
@@ -38,8 +40,9 @@ const AuthForm = () => {
 
     try {
       if (showLogin) {
-        const { token, _id } = await login(body);
-        authCtx.login(token, _id);
+        const { token, currentUser } = await login(body);
+        authCtx.login(token, currentUser);
+        navigate('/home');
       } else {
         body.name = nameRef.current.value;
         body.email = emailRef.current.value;

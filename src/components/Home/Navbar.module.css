@@ -1,0 +1,47 @@
+.navbar{
+    background-color: white;
+    padding: 12px 90px;
+}
+
+.navbar nav{
+    display: flex;
+    justify-content: space-between;
+}
+
+.navbar nav>div{
+    display: flex;
+    align-items: center;
+    gap: 1.8em;
+}
+
+.navbar i{
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.navbar h1{
+    color: #0cd0f8;
+}
+
+.navbar input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.navbar div:has(>input){
+    display: flex;
+    align-items: center;
+    background-color: #f4f3f4;
+    padding: 3px 28px;
+    border-radius: 7px;
+    font-size: .9rem;
+}
+
+.navbar select{
+    outline: none;
+    border: none;
+    padding: 7px 8px;
+    background: #f4f3f4;
+    border-radius: 7px;
+}

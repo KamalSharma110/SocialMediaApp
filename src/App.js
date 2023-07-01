@@ -5,10 +5,11 @@ import './App.css';
 import AuthPage from './pages/AuthPage';
 import AuthContext from './context/auth-context';
 import { getExpirationTime } from './api/utils';
+import HomePage from './pages/HomePage';
 
 function App() {
   const authCtx = useContext(AuthContext);
-
+  
   useEffect(() => {
     if(authCtx.isLoggedIn){
       const expirationTime = getExpirationTime();
@@ -21,6 +22,7 @@ function App() {
   const router = createBrowserRouter([
     { path: '/', element: <Navigate to='/auth' replace/> },
     { path: '/auth', element: <AuthPage /> },
+    { path: '/home', element: <HomePage /> },
     { path: '*', element: <Navigate to='/auth' replace/> },
   ]);
 
