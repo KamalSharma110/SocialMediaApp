@@ -36,14 +36,16 @@ const CreatePost = () => {
     formData.append("userId", authCtx.currentUser.id);
     formData.append("text", inputs.text);
     formData.append("file", inputs.file);
+    formData.append('createdAt', new Date());
 
     await createPost(formData);
-    document.querySelector('#file').value = '';
+
+    if(document.querySelector('#file')) document.querySelector('#file').value = '';
     setInputs({ text: "", file: null });
   };
 
   return (
-    <div className={classes["create-post"] + " px-4 py-3"}>
+    <div className={classes["create-post"] + " px-4 py-3 mb-4"}>
       <form onSubmit={submitHandler}>
         <div className="pb-3 border-bottom border-2">
           <img

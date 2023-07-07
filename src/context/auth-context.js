@@ -17,7 +17,7 @@ export const AuthContextProvider = (props) => {
 
   const login = (token, currentUser) => {
     const expirationTime = new Date();
-    expirationTime.setMinutes(expirationTime.getMinutes() + 30);
+    expirationTime.setHours(expirationTime.getHours() + 1);
 
     const userData = {
       token,

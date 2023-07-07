@@ -1,0 +1,49 @@
+.post {
+  border-radius: 10px;
+  background-color: white;
+  margin: auto;
+  /* max-width: 600px; */
+}
+
+.post p {
+  font-size: 0.9rem;
+}
+
+.post > img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.post > div:last-child {
+  display: flex;
+}
+
+.post > div:last-child i {
+  flex: 1 0 auto;
+  cursor: pointer;
+}
+
+#like::before {
+  color: orangered;
+  animation: like-anim 0.2s;
+}
+
+@keyframes like-anim {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.post > div:last-child i:nth-child(2) {
+  flex: 12 0 auto;
+}
+
+.post > div:last-child i:nth-child(3) {
+  text-align: end;
+}

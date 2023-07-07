@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8080';
+export const BASE_URL = 'http://localhost:8080';
 
 const getToken = () => {
   const currentUserInfo = localStorage.getItem("currentUserInfo");
@@ -8,20 +8,26 @@ const getToken = () => {
 };
 
 const sendRequest = async (url, method, body, isAuthenticated = true, isMultiPart = false) => {
-  let headers = {};
+  const headers = {};
+  const options = {};
 
-  if (method === "POST" && !isMultiPart) headers["Content-Type"] = "application/json";
+  if (method === "POST"){
+    if(!isMultiPart) {
+      headers["Content-Type"] = "application/json";
+      options.body = JSON.stringify(body);
+    }
+    else options.body = body;
+  }
 
   if (isAuthenticated) {
     const token = getToken();
     if (token) headers.Authorization = "Bearer " + token;
   }
 
-  const response = await fetch(url, {
-    method: method,
-    headers: headers,
-    body: isMultiPart ? body : JSON.stringify(body),
-  });
+  options.method = method;
+  options.headers = headers;
+
+  const response = await fetch(url, options);
 
   const resData = await response.json();
 
@@ -50,3 +56,22 @@ export const login = async(body) => {
 export const createPost = async(body) => {
   return await sendRequest(BASE_URL + '/create-post', 'POST', body, true, true);
 };
+
+export const getPosts = async() => {
+  return await sendRequest(BASE_URL + '/posts', 'GET');
+};
+
+export const addFriend = async(body) => {
+  return await sendRequest(BASE_URL + '/friend?add=true', 'POST', body);
+};
+
+export const removeFriend = async(body) => {
+  return await sendRequest(BASE_URL + '/friend?add=false', 'POST', body);
+};
+
+export const getFriends = async() => {
+  return await sendRequest(BASE_URL + '/friends', 'GET');
+};
+
+
+
