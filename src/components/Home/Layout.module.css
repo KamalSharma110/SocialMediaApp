@@ -1,11 +1,9 @@
 .layout{
     display: flex;
-    flex-direction: row-reverse;
     padding-inline: 90px;
     align-items: flex-start;
 }
 
-.layout > div:nth-child(1){
+.layout > div{
     max-width: 600px;
-    order: 1;
 }

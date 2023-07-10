@@ -73,5 +73,25 @@ export const getFriends = async() => {
   return await sendRequest(BASE_URL + '/friends', 'GET');
 };
 
+export const likePost = async(postId) => {
+  return await sendRequest(BASE_URL + `/like-post/${postId}`, 'GET');
+};
+
+export const unlikePost = async(postId) => {
+  return await sendRequest(BASE_URL + `/unlike-post/${postId}`, 'GET');
+};
+
+export const getPostStats = async(postId) => {
+  return await sendRequest(BASE_URL + `/liked-users/${postId}`, 'GET');
+};
+
+export const addComment = async(postId, body) => {
+  return await sendRequest(BASE_URL + `/comment/${postId}`, 'POST', body);
+};
+
+export const getComments = async(postId) => {
+  return await sendRequest(BASE_URL + `/comments/${postId}`, 'GET');
+};
+
 
 

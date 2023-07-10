@@ -1,0 +1,62 @@
+.comments{
+  overflow: auto;
+}
+
+.comments form {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+}
+
+.comments form img {
+  width: 30px;
+  height: 30px;
+  max-width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comments form > * {
+  flex: 1 0 auto;
+}
+
+.comments form input {
+  flex: 294 0 auto;
+  margin-inline: 1em;
+  outline: none;
+  border: 1px solid lightgray;
+  padding-block: 5px;
+}
+
+.comments form button {
+  background-color: #5971fb;
+  color: white;
+  padding: 5px 10px;
+  transition: all 0.2s;
+}
+
+.comments form button:hover {
+  background-color: #4660fb;
+}
+
+.comment-enter {
+  height: 0px;
+}
+
+.comment-enter-active {
+  height: 165px;
+  transition: height 0.2s linear;
+}
+
+.comment-enter-done {
+  height: 165px;
+}
+
+.comment-exit {
+  height: 165px;
+}
+
+.comment-exit-active {
+  height: 0px;
+  transition: height 0.2s linear;
+}

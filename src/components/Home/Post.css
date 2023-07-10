@@ -14,36 +14,40 @@
   border-radius: 10px;
 }
 
-.post > div:last-child {
+.post > div:nth-child(4) {
   display: flex;
 }
 
-.post > div:last-child i {
-  flex: 1 0 auto;
+.post > div:nth-child(4) i {
+  flex: 1 0 4rem;
   cursor: pointer;
+  font-style: normal;
 }
 
-#like::before {
+.post > div:nth-child(4) i::before {
+  margin-right: .5em;
+}
+
+.like::before {
   color: orangered;
-  animation: like-anim 0.2s;
+  animation: like-anim 0.3s alternate;
 }
 
 @keyframes like-anim {
   0% {
     transform: scale(1);
   }
-  50% {
-    transform: scale(1.5);
-  }
+ 
   100% {
-    transform: scale(1);
+    transform: scale(1.5);
   }
 }
 
-.post > div:last-child i:nth-child(2) {
+.post > div:nth-child(4) i:nth-child(2) {
   flex: 12 0 auto;
 }
 
-.post > div:last-child i:nth-child(3) {
+.post > div:nth-child(4) i:nth-child(3) {
   text-align: end;
 }
+

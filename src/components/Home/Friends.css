@@ -1,0 +1,39 @@
+.friends-container{
+    background-color: white;
+    border-radius: 10px;
+    width: 365px;
+    position: sticky;
+    top: 5px;
+}
+
+.friends-container ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.friends-container ul li:last-child > div{
+    margin-bottom: 0 !important;
+}
+
+.friend-anim-enter{
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.friend-anim-enter-active{
+    transform: translateX(0);
+    opacity: 1;
+    transition: all .3s;
+}
+
+.friend-anim-exit{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.friend-anim-exit-active{
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all .3s;
+}

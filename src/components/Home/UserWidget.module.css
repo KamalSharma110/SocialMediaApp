@@ -1,0 +1,46 @@
+.user-widget{
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    background-color: white;
+    border-radius: 10px;
+    width: 365px;
+    position: sticky;
+    top: 5px;
+}
+
+.user-widget img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-widget h6:nth-of-type(1){
+    grid-column: 2 / span 1;
+}
+
+.user-widget h6:nth-of-type(2){
+    grid-column: span 3;
+}
+
+.user-widget hr{
+    grid-column: 1 / -1;
+}
+
+.user-widget i:nth-of-type(1){
+    grid-column: 3 / 4;
+    text-align: end;
+    align-self: center;
+}
+
+.user-widget i:nth-of-type(3) {
+    grid-column: 1 / 2;
+}
+
+.user-widget span:nth-of-type(4),:nth-of-type(6){
+    text-align: end;
+}
+
+.user-widget span:not(:nth-of-type(4), :nth-of-type(6)){
+    grid-column: span 2;
+}

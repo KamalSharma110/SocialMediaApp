@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getFriends } from "../api/api";
+import AuthContext from "./auth-context";
 
 const FriendsContext = React.createContext({
   friends: [],
@@ -9,13 +10,15 @@ const FriendsContext = React.createContext({
 
 export const FriendsContextProvider = (props) => {
   const [friends, setFriends] = useState([]);
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
-    (async () => {
-      const response = await getFriends();
-      setFriends(response.friends);
-    })();
-  }, []);
+    if(authCtx.isLoggedIn)
+      (async () => {
+        const response = await getFriends();
+        setFriends(response.friends);
+      })();
+  }, [authCtx.isLoggedIn]);
 
   const removeFriend = (id) => {
     const updatedFriends = friends.filter((friend) => friend.friendId !== id);

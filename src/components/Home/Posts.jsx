@@ -22,6 +22,7 @@ const Posts = () => {
       username={post.username}
       postText={post.text}
       postImage={post.file}
+      postId={post._id}
     />
   ));
 };
