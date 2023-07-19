@@ -1,0 +1,68 @@
+.edit-profile form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 1em;
+}
+
+.edit-profile input[type="file"] {
+    display: none;
+}
+
+.edit-profile h2{
+    grid-column: 1 / 2;
+}
+
+.edit-profile :where(label) {
+    grid-column: -1 / -2;
+}
+
+.edit-profile label{
+    justify-self: end;
+}
+
+.edit-profile input{
+    grid-column: 1 / span 1;
+}
+
+.edit-profile input[placeholder="Location"] {
+    grid-column: -1 / -2;
+}
+
+.edit-profile input{
+    outline: none;
+    border: none;
+    background-color: #f4f3f4;
+    font-size: .9rem;
+    border-radius: 5px;
+}
+
+.edit-profile button {
+    color: white;    
+    border-radius: 5px;
+    grid-column: 1 / -1;
+    justify-self: center;
+    background-color: #0dcaf0;
+    transition: background-color .2s;
+}
+
+.edit-profile button:hover {
+    background-color: #0cbbde;
+}
+
+.edit-profile label:has(i) + img{
+    width: 20%;
+    max-width: 100%;
+    grid-column: 1 / -1;
+    justify-self: center;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.edit-profile > form > label:has(i) + img:nth-of-type(2){
+    width: 40%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+}
+
+

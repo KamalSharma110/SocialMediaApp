@@ -1,6 +1,9 @@
 .navbar{
     background-color: white;
     padding: 12px 90px;
+    position: sticky;   
+    top: 0;
+    z-index: 10;
 }
 
 .navbar nav{
@@ -19,8 +22,14 @@
     color: #333;
 }
 
-.navbar h1{
+.navbar a{
     color: #0cd0f8;
+    text-decoration: none;
+    transition: all .2s;
+}
+
+.navbar a:hover{
+    color: #0bc1e6;
 }
 
 .navbar input{

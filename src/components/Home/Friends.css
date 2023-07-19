@@ -1,9 +1,8 @@
 .friends-container{
     background-color: white;
     border-radius: 10px;
-    width: 365px;
     position: sticky;
-    top: 5px;
+    top: 96px;
 }
 
 .friends-container ul{

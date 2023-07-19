@@ -1,0 +1,79 @@
+.profile > div {
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 1em;
+  text-align: center;
+  height: 246px;
+}
+
+.profile img:not(.profile > img) {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  transform: translateY(-50%);
+}
+
+.profile h4 {
+  transform: translateY(-216%);
+  font-weight: normal;
+}
+
+.profile h4 + div {
+  display: flex;
+  transform: translateY(-201%);
+  color: #757675;
+  align-items: center;
+}
+
+.profile h4 + div > * {
+  flex-basis: 56px;
+}
+
+.profile h4 + div > div:first-child {
+  flex-grow: 2;
+  text-align: start;
+}
+
+.profile h4 + div > div:last-child {
+  flex-grow: 1;
+  text-align: end;
+  color: black;
+}
+
+.profile h4 + div > div:nth-child(2) {
+    flex-grow: 4;
+    text-align: end;
+    margin-right: 88px;
+}
+
+.profile h4 + div > div:nth-child(3) {
+  flex-grow: 7;
+}
+
+.profile h4 + div > div:is(:nth-child(2), :nth-child(3)) i {
+  font-size: 1.1rem;
+}
+
+.profile h4 + div > div:is(:nth-child(2), :nth-child(3)) span {
+  font-size: .9rem;
+}
+
+.profile h4 + div > div:nth-child(1) i {
+  font-size: 1.5rem;
+}
+
+.profile button {
+  transform: translateY(-164%);
+  background-color: #5971fb;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: .9em;
+  transition: all 0.2s;
+}
+
+.profile button:hover {
+  background-color: #4660fb;
+}

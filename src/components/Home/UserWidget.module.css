@@ -1,11 +1,11 @@
 .user-widget{
     display: grid;
-    grid-template-columns: 15% 70% 15%;
+    grid-template-columns: 10% 70% 20%;
+    grid-template-rows: repeat(2, auto) repeat(10, 31px);
     background-color: white;
     border-radius: 10px;
-    width: 365px;
     position: sticky;
-    top: 5px;
+    top: 96px;
 }
 
 .user-widget img{
@@ -13,10 +13,44 @@
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
+    grid-row: span 2;
+}
+
+.user-widget a{
+    align-self: end;
+    margin-left: 1.8em;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+    transition: color .5s;
+}
+
+.user-widget a:hover{
+    color:rgb(92 92 92);
 }
 
 .user-widget h6:nth-of-type(1){
     grid-column: 2 / span 1;
+    font-size: .8rem;
+    color: #757675;
+    font-weight: 100;
+    margin-left: 2.2em;
+    margin-bottom: 0;
+}
+
+.user-widget span{
+    align-self: center;
+}
+
+.user-widget span:not(:nth-of-type(n + 7)) {
+    font-size: .8rem;
+    color: #757675;
+    font-weight: 100;
+}
+
+.user-widget span:nth-of-type(n + 7){
+    font-size: .9rem;
 }
 
 .user-widget h6:nth-of-type(2){
@@ -27,17 +61,25 @@
     grid-column: 1 / -1;
 }
 
+.user-widget i{
+    color: #757675;
+    font-size: 1.2rem;
+}
+
 .user-widget i:nth-of-type(1){
     grid-column: 3 / 4;
+    grid-row: span 2;
     text-align: end;
     align-self: center;
+    cursor: pointer;
+    font-size: 1.3rem;
 }
 
 .user-widget i:nth-of-type(3) {
     grid-column: 1 / 2;
 }
 
-.user-widget span:nth-of-type(4),:nth-of-type(6){
+.user-widget span:is(:nth-of-type(4), :nth-of-type(6)) {
     text-align: end;
 }
 

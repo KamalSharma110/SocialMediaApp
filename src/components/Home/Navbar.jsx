@@ -1,7 +1,8 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
-import AuthContext from "../../context/auth-context";
 import classes from "./Navbar.module.css";
+import AuthContext from "../../context/auth-context";
 
 const Navbar = () => {
   const authCtx = useContext(AuthContext);
@@ -10,7 +11,7 @@ const Navbar = () => {
     <header className={classes.navbar + ' mb-4'}>
       <nav>
         <div>
-          <h1 className="fs-2 fw-bold mb-0">Sociopedia</h1>
+          <Link to='/home' className="fs-2 fw-bold mb-0">Sociopedia</Link>
           <div>
             <input type="search" placeholder="Search..." />
             <i className="bi bi-search"></i>

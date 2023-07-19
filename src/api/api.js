@@ -93,5 +93,14 @@ export const getComments = async(postId) => {
   return await sendRequest(BASE_URL + `/comments/${postId}`, 'GET');
 };
 
+export const getPostsOfUser = async(userId) => {
+  return await sendRequest(BASE_URL + `/posts/${userId}`, 'GET');
+};
 
+export const updateProfile = async(body) => {
+  return await sendRequest(BASE_URL + '/auth/update-profile', 'POST', body, true, true);
+};
 
+export const getProfile = async(userId) => {
+  return await sendRequest(BASE_URL + `/auth/profile/${userId}`, 'GET');
+};

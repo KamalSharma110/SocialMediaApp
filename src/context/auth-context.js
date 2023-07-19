@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { getProfile } from "../api/api";
 
 const AuthContext = React.createContext({
   token: "",
   isLoggedIn: false,
   currentUser: {},
+  updateCurrentUser: () => {},
   login: () => {},
   logout: () => {},
 });
@@ -32,10 +34,17 @@ export const AuthContextProvider = (props) => {
 
     setCurrentUserInfo(userData);
   };
-
+  
   const logout = () => {
     localStorage.removeItem("currentUserInfo");
     setCurrentUserInfo(null);
+  };
+
+  const updateCurrentUser = async() => {
+    const response = await getProfile(currentUserInfo.currentUser.id);
+    const userData = {...currentUserInfo, currentUser: {...currentUserInfo.currentUser, ...response}};
+    localStorage.setItem('currentUserInfo', JSON.stringify(userData));
+    setCurrentUserInfo(userData);
   };
 
   return (
@@ -44,6 +53,7 @@ export const AuthContextProvider = (props) => {
         token: currentUserInfo.token,
         isLoggedIn: isLoggedIn,
         currentUser: currentUserInfo.currentUser,
+        updateCurrentUser: updateCurrentUser,
         login: login,
         logout: logout,
       }}

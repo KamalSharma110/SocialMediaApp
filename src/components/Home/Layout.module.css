@@ -1,9 +1,0 @@
-.layout{
-    display: flex;
-    padding-inline: 90px;
-    align-items: flex-start;
-}
-
-.layout > div{
-    max-width: 600px;
-}

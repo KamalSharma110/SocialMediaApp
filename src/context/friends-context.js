@@ -25,8 +25,8 @@ export const FriendsContextProvider = (props) => {
     setFriends(updatedFriends);
   };
 
-  const addFriend = (id, username) => {
-    setFriends([...friends, { friendId: id, friendUsername: username }]);
+  const addFriend = (id, username, image) => {
+    setFriends([...friends, { friendId: id, friendUsername: username, friendImage: image }]);
   };
 
   return (

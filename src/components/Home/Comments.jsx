@@ -4,21 +4,27 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 import "./Comments.css";
 import Comment from "./Comment";
-import { addComment, getComments } from "../../api/api";
 import AuthContext from "../../context/auth-context";
+import { BASE_URL, addComment, getComments } from "../../api/api";
+import profilePlaceholder from "../../assets/profile-placeholder.png";
 
 
 const Comments = ({ postId, setStats, inProp }) => {
   const inputRef = useRef();
+  const nodeRef = useRef();
   const [comments, setComments] = useState([]);
   const authCtx = useContext(AuthContext);
 
+  const profileImage = authCtx.currentUser.profileImage;
+
   useEffect(() => {
-    (async () => {
-      const response = await getComments(postId);
-      setComments(response.comments);
-    })();
-  }, [postId]);
+    if (inProp) {
+      (async () => {
+        const response = await getComments(postId);
+        setComments(response.comments);
+      })();
+    }
+  }, [postId, inProp]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -51,12 +57,16 @@ const Comments = ({ postId, setStats, inProp }) => {
       classNames="comment"
       timeout={200}
       in={inProp}
+      nodeRef={nodeRef}
+      mountOnEnter
       unmountOnExit
     >
-      <div className='comments'>
-        <form className="my-3" onSubmit={submitHandler}>
+      <div className="comments mt-3" ref={nodeRef}>
+        <form className="mb-3" onSubmit={submitHandler}>
           <img
-            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src={
+              profileImage ? BASE_URL + "/" + profileImage : profilePlaceholder
+            }
             alt="current_user_profile_picture"
           />
           <input
@@ -74,6 +84,7 @@ const Comments = ({ postId, setStats, inProp }) => {
             <Comment
               key={comment._id}
               username={comment.username}
+              userImage={comment.userImage}
               text={comment.text}
               createdAt={comment.createdAt}
             />

@@ -52,13 +52,22 @@
     left: 19%;
 }
 
-.friend h5{
+.friend a{
     font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+    transition: color .5s;
 }
 
-.friend h6{
+.friend a:hover{
+    color:rgb(92 92 92);
+}
+
+.friend time{
+    display: block;
+    margin-block-start: -5px;
     font-size: .8rem;
     color: darkgray;
-    font-weight: normal;
 }
 

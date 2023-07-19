@@ -1,12 +1,16 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import Moment from "react-moment";
 
-import { addFriend, removeFriend } from "../../api/api";
+import { BASE_URL, addFriend, removeFriend } from "../../api/api";
 import classes from "./Friend.module.css";
 import AuthContext from "../../context/auth-context";
 import FriendsContext from "../../context/friends-context";
+import profilePlaceholder from "../../assets/profile-placeholder.png";
+
 
 const Friend = (props) => {
-  const { username, userId: friendId } = props;
+  const { createdAt, username, userId: friendId, userImage } = props;
   let isFriend = props.isFriend || null;
 
   const authCtx = useContext(AuthContext);
@@ -26,31 +30,29 @@ const Friend = (props) => {
       frCtx.removeFriend(friendId);
     } else {
       addFriend({ currentUserId, friendId });
-      frCtx.addFriend(friendId, username);
+      frCtx.addFriend(friendId, username, userImage);
     }
   };
 
   return (
-      <div className={classes.friend + " mb-3"}>
-        <img
-          src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600"
-          alt=""
-        />
-        <div className="ms-2">
-          <h5 className="mb-0">{username}</h5>
-          <h6 className="mb-0">India</h6>
-        </div>
-        <span className="text-primary bg-info-subtle rounded-circle fs-5">
-          {currentUserId !== friendId && (
-            <i
-              className={`bi ${
-                !isFriend ? "bi-person-plus" : "bi-person-dash"
-              }`}
-              onClick={clickHandler}
-            ></i>
-          )}
-        </span>
+    <div className={classes.friend + " mb-3"}>
+      <img
+        src={userImage ? BASE_URL + "/" + userImage : profilePlaceholder}
+        alt=""
+      />
+      <div className="ms-2">
+        <Link to={`/home/profile/${friendId}`}>{username}</Link>
+        {createdAt && <Moment fromNow>{createdAt}</Moment>}
       </div>
+      <span className="text-primary bg-info-subtle rounded-circle fs-5">
+        {currentUserId !== friendId && (
+          <i
+            className={`bi ${!isFriend ? "bi-person-plus" : "bi-person-dash"}`}
+            onClick={clickHandler}
+          ></i>
+        )}
+      </span>
+    </div>
   );
 };
 

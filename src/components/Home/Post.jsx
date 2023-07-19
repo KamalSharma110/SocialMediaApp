@@ -6,8 +6,15 @@ import "./Post.css";
 import AuthContext from "../../context/auth-context";
 import Comments from "./Comments";
 
-
-const Post = ({ userImage, username, postImage, postText, userId, postId }) => {
+const Post = ({
+  userImage,
+  username,
+  postImage,
+  postText,
+  userId,
+  postId,
+  createdAt,
+}) => {
   const [liked, setLiked] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [stats, setStats] = useState({ likes: 0, comments: 0 });
@@ -49,9 +56,14 @@ const Post = ({ userImage, username, postImage, postText, userId, postId }) => {
 
   return (
     <div className="post px-4 py-3 mb-4">
-      <Friend username={username} userImage={userImage} userId={userId} />
-      <p className="mb-0">{postText}</p>
-      <img src={BASE_URL + "/" + postImage} alt="" className="my-3" />
+      <Friend
+        username={username}
+        userImage={userImage}
+        userId={userId}
+        createdAt={createdAt}
+      />
+      <p className="mb-3">{postText}</p>
+      { postImage && <img src={BASE_URL + "/" + postImage} alt="" className="mb-3"/> }
       <div>
         <i
           className={`bi ${!liked ? "bi-heart" : "bi-heart-fill like"}`}

@@ -2,13 +2,15 @@ import { useContext, useState } from "react";
 
 import classes from "./CreatePost.module.css";
 import AuthContext from "../../context/auth-context";
-import { createPost } from "../../api/api";
+import { BASE_URL, createPost } from "../../api/api";
+import profilePlaceholder from "../../assets/profile-placeholder.png";
 
-const CreatePost = () => {
+const CreatePost = (props) => {
   const [showSelector, setShowSelector] = useState(false);
   const [inputs, setInputs] = useState({ text: "", file: null });
 
   const authCtx = useContext(AuthContext);
+  const profileImage = authCtx.currentUser.profileImage;
 
   const fileChangeHandler = (e) => {
     setInputs((prevState) => {
@@ -23,7 +25,7 @@ const CreatePost = () => {
   };
 
   const fileDeleteHandler = () => {
-    document.querySelector('#file').value = '';
+    document.querySelector("#file").value = "";
     setInputs((prevState) => {
       return { ...prevState, file: null };
     });
@@ -36,11 +38,13 @@ const CreatePost = () => {
     formData.append("userId", authCtx.currentUser.id);
     formData.append("text", inputs.text);
     formData.append("file", inputs.file);
-    formData.append('createdAt', new Date());
-
+      
     await createPost(formData);
 
-    if(document.querySelector('#file')) document.querySelector('#file').value = '';
+    props.fetchPosts();
+
+    if (document.querySelector("#file"))
+      document.querySelector("#file").value = "";
     setInputs({ text: "", file: null });
   };
 
@@ -49,7 +53,9 @@ const CreatePost = () => {
       <form onSubmit={submitHandler}>
         <div className="pb-3 border-bottom border-2">
           <img
-            src="https://images.pexels.com/photos/2681751/pexels-photo-2681751.jpeg?auto=compress&cs=tinysrgb&w=600"
+            src={
+              profileImage ? BASE_URL + "/" + profileImage : profilePlaceholder
+            }
             alt="user-pic"
           />
           <input
