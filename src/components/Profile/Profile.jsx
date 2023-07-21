@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 import { BASE_URL, addFriend, getProfile, removeFriend } from "../../api/api";
 import classes from "./Profile.module.css";
 import coverPlaceholder from "../../assets/cover-placeholder.jpg";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
-import { useParams } from "react-router-dom";
 import FriendsContext from "../../context/friends-context";
 import AuthContext from "../../context/auth-context";
 
@@ -13,6 +13,7 @@ const Profile = () => {
   const [profile, setProfile] = useState(null);
   const frCtx = useContext(FriendsContext);
   const authCtx = useContext(AuthContext);
+
 
   const userId = params.userId;
   const currentUserId = authCtx.currentUser.id;

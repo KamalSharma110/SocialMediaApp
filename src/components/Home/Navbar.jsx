@@ -1,20 +1,60 @@
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 import classes from "./Navbar.module.css";
 import AuthContext from "../../context/auth-context";
+import { searchQuery } from "../../api/api";
+import PostsContext from "../../context/posts-context";
 
 const Navbar = () => {
+  const [allowSearch, setAllowSearch] = useState(false);
   const authCtx = useContext(AuthContext);
+  const postCtx = useContext(PostsContext);
+  const inputRef = useRef();
+
+  const {initialPosts, setPosts} = postCtx;
+  
+
+  const submitHandler = async () => {
+    const response = await searchQuery({
+      searchText: inputRef.current.value,
+    });
+
+    const ids = response.ids || [];
+    setPosts([
+      ...initialPosts.filter((post) => ids?.includes(post._id)),
+    ]);
+  };
+
+  const inputChangeHandler = (e) => {
+    if (e.target.value === "") {
+      setPosts(initialPosts);
+      setAllowSearch(false);
+    } else {
+      setAllowSearch(true);
+    }
+  };
 
   return (
-    <header className={classes.navbar + ' mb-4'}>
+    <header className={classes.navbar + " mb-4"}>
       <nav>
         <div>
-          <Link to='/home' className="fs-2 fw-bold mb-0">Sociopedia</Link>
+          <Link to="/home" className="fs-2 fw-bold mb-0">
+            Sociopedia
+          </Link>
           <div>
-            <input type="search" placeholder="Search..." />
-            <i className="bi bi-search"></i>
+            <input
+              type="text"
+              placeholder="Search..."
+              onChange={inputChangeHandler}
+              ref={inputRef}
+            />
+            <button
+              onClick={submitHandler}
+              style={{visibility: allowSearch ? 'visible' : 'hidden'}}
+            >
+              <i className="bi bi-search"></i>
+            </button>
           </div>
         </div>
         <div>
@@ -43,7 +83,6 @@ const Navbar = () => {
                   className="dropdown-item"
                   href="/"
                   onClick={(e) => {
-                    // e.preventDefault();
                     authCtx.logout();
                   }}
                 >

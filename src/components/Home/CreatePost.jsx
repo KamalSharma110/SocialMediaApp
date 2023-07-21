@@ -2,15 +2,19 @@ import { useContext, useState } from "react";
 
 import classes from "./CreatePost.module.css";
 import AuthContext from "../../context/auth-context";
-import { BASE_URL, createPost } from "../../api/api";
+import { BASE_URL, createPost, getPosts } from "../../api/api";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
+import PostsContext from "../../context/posts-context";
 
-const CreatePost = (props) => {
+const CreatePost = () => {
   const [showSelector, setShowSelector] = useState(false);
   const [inputs, setInputs] = useState({ text: "", file: null });
 
   const authCtx = useContext(AuthContext);
+  const postCtx = useContext(PostsContext);
+
   const profileImage = authCtx.currentUser.profileImage;
+  let {setPosts, setInitialPosts} = postCtx;
 
   const fileChangeHandler = (e) => {
     setInputs((prevState) => {
@@ -41,7 +45,9 @@ const CreatePost = (props) => {
       
     await createPost(formData);
 
-    props.fetchPosts();
+    const response = await getPosts();
+    setInitialPosts(response.posts);
+    setPosts(response.posts);
 
     if (document.querySelector("#file"))
       document.querySelector("#file").value = "";

@@ -104,3 +104,7 @@ export const updateProfile = async(body) => {
 export const getProfile = async(userId) => {
   return await sendRequest(BASE_URL + `/auth/profile/${userId}`, 'GET');
 };
+
+export const searchQuery = async(body) => {
+  return await sendRequest(BASE_URL + `/search`, 'POST', body);
+};

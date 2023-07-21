@@ -1,56 +1,52 @@
-.navbar{
-    background-color: white;
-    padding: 12px 90px;
-    position: sticky;   
-    top: 0;
-    z-index: 10;
-}
+.navbar {
+  background-color: white;
+  padding: 12px 90px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 
-.navbar nav{
+  & nav {
     display: flex;
     justify-content: space-between;
-}
 
-.navbar nav>div{
-    display: flex;
-    align-items: center;
-    gap: 1.8em;
-}
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: 1.8em;
 
-.navbar i{
+      & > a {
+        color: #0cd0f8;
+        text-decoration: none;
+        transition: all 0.2s;
+
+        &:hover {
+          color: #0bc1e6;
+        }
+      }
+    }
+  }
+  & i {
     font-size: 1.2rem;
     color: #333;
-}
-
-.navbar a{
-    color: #0cd0f8;
-    text-decoration: none;
-    transition: all .2s;
-}
-
-.navbar a:hover{
-    color: #0bc1e6;
-}
-
-.navbar input{
+  }
+  & :where(input, button) {
     outline: none;
     border: none;
     background-color: transparent;
-}
-
-.navbar div:has(>input){
-    display: flex;
-    align-items: center;
-    background-color: #f4f3f4;
-    padding: 3px 28px;
-    border-radius: 7px;
-    font-size: .9rem;
-}
-
-.navbar select{
+  }
+  & select {
     outline: none;
     border: none;
     padding: 7px 8px;
     background: #f4f3f4;
     border-radius: 7px;
+  }
+  & div:has(> input) {
+    display: flex;
+    align-items: center;
+    background-color: #f4f3f4;
+    padding: 3px 28px;
+    border-radius: 7px;
+    font-size: 0.9rem;
+  }
 }

@@ -16,7 +16,6 @@ const Root = () => {
         </div>
         <Friends />
       </div>
-      
     </>
   );
 };
