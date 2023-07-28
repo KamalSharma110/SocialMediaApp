@@ -1,5 +1,5 @@
 .auth-background{
-    background-color: #c3beff;
+    background-color: var(--clr-background);
     position: relative;
     height: 757px;
 }
@@ -50,7 +50,7 @@
 
 .auth-form__img{
     width: 100%;
-    background-image: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)), url('https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=600');
+    background-image: linear-gradient(#5971fb2b, #5971fb2b), url('https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=600');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -76,13 +76,22 @@
 }
 
 .auth-form>div:nth-child(1) button{
-    background-color: #807bcc;
+    background-color: var(--clr-btn-secondary);
     color: white;
+
+    &:hover{
+        background-color: var(--clr-btn-secondary-dark);
+    }
 }
 
 .auth-form__img button{
     background-color: white;
-    color: #807bcc;
+    color: var(--clr-btn-secondary);
+
+    &:hover{
+        color: white;
+        background-color: var(--clr-btn-secondary);
+    }
 }
 
 .auth-form__img--change-order{
@@ -90,7 +99,7 @@
 }
 
 .auth-form__img--change-img{
-    background-image: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)), url('https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600');
+    background-image: linear-gradient(#5971fb2b, #5971fb2b), url('https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600');
 }
 
 .auth-form .error{

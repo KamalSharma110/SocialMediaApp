@@ -1,29 +1,57 @@
-import { useContext, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import ReactDOM from "react-dom";
 
+import Modal from "../Modal/Modal";
 import classes from "./Navbar.module.css";
 import AuthContext from "../../context/auth-context";
-import { searchQuery } from "../../api/api";
 import PostsContext from "../../context/posts-context";
+import { getPostsOfUser, getPosts, searchQuery } from "../../api/api.js";
 
+let initialPosts;
 const Navbar = () => {
-  const [allowSearch, setAllowSearch] = useState(false);
-  const authCtx = useContext(AuthContext);
-  const postCtx = useContext(PostsContext);
+  const darkMode = JSON.parse(localStorage.getItem("DarkMode") || "false");
   const inputRef = useRef();
+  const params = useParams();
 
-  const {initialPosts, setPosts} = postCtx;
-  
+  const postCtx = useContext(PostsContext);
+  const authCtx = useContext(AuthContext);
+
+  const [allowSearch, setAllowSearch] = useState(false);
+  const [isDarkMode, setDarkMode] = useState(darkMode);
+  const [error, setError] = useState(null);
+
+  const { setPosts } = postCtx;
+  const { isLoggedIn } = authCtx;
+  const userId = params.userId;
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      toggleDarkMode(darkMode);
+      (async () => {
+        try {
+          let response;
+          if (userId) response = await getPostsOfUser(userId);
+          else response = await getPosts();
+          initialPosts = response.posts;
+          setPosts(response.posts);
+        } catch (err) {
+          setError(err);
+        }
+      })();
+    }
+  }, [userId, isLoggedIn, setPosts]);
 
   const submitHandler = async () => {
-    const response = await searchQuery({
-      searchText: inputRef.current.value,
-    });
-
-    const ids = response.ids || [];
-    setPosts([
-      ...initialPosts.filter((post) => ids?.includes(post._id)),
-    ]);
+    try {
+      const response = await searchQuery({
+        searchText: inputRef.current.value,
+      });
+      const ids = response.ids || [];
+      setPosts([...initialPosts.filter((post) => ids?.includes(post._id))]);
+    } catch (err) {
+      setError(err);
+    }
   };
 
   const inputChangeHandler = (e) => {
@@ -35,65 +63,91 @@ const Navbar = () => {
     }
   };
 
+  const toggleDarkMode = (prevTheme = undefined) => {
+    const root = document.getElementById("root");
+    let darkMode;
+
+    if (prevTheme !== undefined) darkMode = !prevTheme;
+    else darkMode = JSON.parse(localStorage.getItem("DarkMode") || "false");
+
+    root.className = darkMode ? "" : "darkmode";
+    localStorage.setItem("DarkMode", !darkMode);
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <header className={classes.navbar + " mb-4"}>
-      <nav>
-        <div>
-          <Link to="/home" className="fs-2 fw-bold mb-0">
-            Sociopedia
-          </Link>
+    <>
+      <header className={classes.navbar + " mb-4"}>
+        <nav>
           <div>
-            <input
-              type="text"
-              placeholder="Search..."
-              onChange={inputChangeHandler}
-              ref={inputRef}
-            />
-            <button
-              onClick={submitHandler}
-              style={{visibility: allowSearch ? 'visible' : 'hidden'}}
-            >
-              <i className="bi bi-search"></i>
-            </button>
+            <Link to="/home" className="fs-2 fw-bold mb-0">
+              Sociopedia
+            </Link>
+            <div>
+              <input
+                type="text"
+                placeholder="Search posts..."
+                onChange={inputChangeHandler}
+                ref={inputRef}
+              />
+              <button
+                onClick={submitHandler}
+                style={{ visibility: allowSearch ? "visible" : "hidden" }}
+              >
+                <i className="bi bi-search cursor"></i>
+              </button>
+            </div>
           </div>
-        </div>
-        <div>
-          <i className="bi bi-sun-fill"></i>
-          <i className="bi bi-chat-left-text-fill"></i>
-          <i className="bi bi-bell-fill"></i>
-          <i className="bi bi-question-circle-fill"></i>
-          <div className="dropdown">
-            {" "}
-            {/* not using select and option tags because option tag cannot be styled */}
-            <button
-              className="px-3 btn btn-secondary dropdown-toggle bg-secondary-subtle text-dark border-0"
-              type="button"
-              data-bs-toggle="dropdown"
-            >
-              {authCtx.currentUser.username}
-            </button>
-            <ul className="dropdown-menu bg-secondary-subtle">
-              <li>
-                <a className="dropdown-item" href="/">
-                  {authCtx.currentUser.username}
-                </a>
-              </li>
-              <li>
-                <a
-                  className="dropdown-item"
-                  href="/"
-                  onClick={(e) => {
-                    authCtx.logout();
-                  }}
-                >
-                  Logout
-                </a>
-              </li>
-            </ul>
+          <div>
+            <i
+              className={`bi bi-${isDarkMode ? "sun" : "moon-stars"}-fill cursor`}
+              onClick={() => toggleDarkMode()}
+            ></i>
+            <i className="bi bi-chat-left-text-fill"></i>
+            <i className="bi bi-bell-fill"></i>
+            <i className="bi bi-question-circle-fill"></i>
+            <div className="dropdown">
+              {/* not using select and option tags because option tag cannot be styled */}
+              <button
+                className="px-3 btn btn-secondary dropdown-toggle bg-secondary-subtle text-dark border-0"
+                type="button"
+                data-bs-toggle="dropdown"
+              >
+                {authCtx.currentUser.username}
+              </button>
+              <ul className="dropdown-menu bg-secondary-subtle">
+                <li>
+                  <a className="dropdown-item" href="/">
+                    {authCtx.currentUser.username}
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="dropdown-item"
+                    href="/"
+                    onClick={(e) => {
+                      authCtx.logout();
+                    }}
+                  >
+                    Logout
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
+      {ReactDOM.createPortal(
+        <Modal
+          showModal={!!error}
+          setShowModal={setError}
+          title="An error occured"
+        >
+          <p>{error?.message}</p>
+        </Modal>,
+        document.getElementById("root")
+      )}
+    </>
   );
 };
 

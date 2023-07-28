@@ -31,7 +31,7 @@
 .edit-profile input{
     outline: none;
     border: none;
-    background-color: #f4f3f4;
+    background-color: var(--clr-background);
     font-size: .9rem;
     border-radius: 5px;
 }
@@ -41,12 +41,12 @@
     border-radius: 5px;
     grid-column: 1 / -1;
     justify-self: center;
-    background-color: #0dcaf0;
+    background-color: var(--clr-btn-primary);
     transition: background-color .2s;
 }
 
 .edit-profile button:hover {
-    background-color: #0cbbde;
+    background-color: var(--clr-btn-primary-dark);
 }
 
 .edit-profile label:has(i) + img{

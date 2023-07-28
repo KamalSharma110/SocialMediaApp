@@ -24,19 +24,20 @@
   flex: 294 0 auto;
   margin-inline: 1em;
   outline: none;
-  border: 1px solid lightgray;
+  border: 1px solid var(--clr-background);
   padding-block: 5px;
+  background-color: var(--clr-background);
 }
 
 .comments form button {
-  background-color: #5971fb;
+  background-color: var(--clr-btn-secondary);
   color: white;
   padding: 5px 10px;
   transition: all 0.2s;
 }
 
 .comments form button:hover {
-  background-color: #4660fb;
+  background-color: var(--clr-btn-secondary-dark);
 }
 
 .comment-enter {

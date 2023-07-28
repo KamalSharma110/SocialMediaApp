@@ -1,32 +1,37 @@
 .post {
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--clr-foreground);
   margin: auto;
-}
 
-.post p {
-  font-size: 0.9rem;
-}
+  & p {
+    font-size: 0.9rem;
+  }
 
-.post > img {
-  width: 100%;
-  object-fit: cover;
-  height: 320px;
-  border-radius: 10px;
-}
+  & > img {
+    width: 100%;
+    object-fit: cover;
+    height: 320px;
+    border-radius: 10px;
+  }
 
-.post > div:nth-of-type(2) {
-  display: flex;
-}
+  & > div:nth-of-type(2) {
+    display: grid;
+    grid-template-columns: repeat(4, max-content) auto;
 
-.post > div:nth-of-type(2) i {
-  flex: 1 0 4rem;
-  cursor: pointer;
-  font-style: normal;
-}
+    & i {
+      font-style: normal;
+      color: var(--clr-text-primary);
+      margin-inline-end: .5em;
 
-.post > div:nth-of-type(2) i::before {
-  margin-right: .5em;
+      &:nth-of-type(3) {
+        justify-self: end;
+      }
+    }
+
+    & span{
+      margin-inline-end: 1em;
+    }
+  }
 }
 
 .like::before {
@@ -38,19 +43,8 @@
   0% {
     transform: scale(1);
   }
- 
+
   100% {
     transform: scale(1.5);
   }
 }
-
-.post > div:nth-of-type(2) i:nth-child(2) {
-  flex: 12 0 auto;
-}
-
-.post > div:nth-of-type(2) i:nth-child(3) {
-  text-align: end;
-}
-
-
-

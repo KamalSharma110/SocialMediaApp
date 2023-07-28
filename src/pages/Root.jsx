@@ -6,6 +6,7 @@ import Navbar from "../components/Home/Navbar";
 import UserWidget from "../components/Home/UserWidget";
 
 const Root = () => {
+  
   return (
     <>
       <Navbar />

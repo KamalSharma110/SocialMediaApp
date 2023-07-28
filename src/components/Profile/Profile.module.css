@@ -1,5 +1,5 @@
 .profile > div {
-  background-color: white;
+  background-color: var(--clr-foreground);
   border-radius: 10px;
   margin-top: 1em;
   text-align: center;
@@ -22,7 +22,7 @@
 .profile h4 + div {
   display: flex;
   transform: translateY(-201%);
-  color: #757675;
+  color: var(--clr-text-secondary);
   align-items: center;
 }
 
@@ -38,7 +38,7 @@
 .profile h4 + div > div:last-child {
   flex-grow: 1;
   text-align: end;
-  color: black;
+  color: var(--clr-text-primary);
 }
 
 .profile h4 + div > div:nth-child(2) {
@@ -65,7 +65,7 @@
 
 .profile button {
   transform: translateY(-164%);
-  background-color: #5971fb;
+  background-color: var(--clr-btn-secondary);
   color: white;
   padding: 5px 10px;
   border: none;
@@ -75,5 +75,5 @@
 }
 
 .profile button:hover {
-  background-color: #4660fb;
+  background-color: var(--clr-btn-secondary-dark);
 }

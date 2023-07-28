@@ -22,7 +22,7 @@ const UserWidget = () => {
       <div className={classes["user-widget"] + " px-4 py-3"}>
         <img src={profileImage ? BASE_URL + "/" + profileImage : profilePlaceholder} alt="" />
         <Link to={`/home/profile/${id}`}>{username}</Link>
-        <i className="bi bi-person-gear" onClick={() => setShowModal(true)}></i>
+        <i className="bi bi-person-gear cursor" onClick={() => setShowModal(true)}></i>
         <h6>{frCtx.friends.length + " friends"}</h6>
         <hr />
         <i className="bi bi-geo-alt"></i>
@@ -47,6 +47,7 @@ const UserWidget = () => {
             showModal={showModal}
             setShowModal={setShowModal}
             title="Edit Profile"
+            isEditModal
           >
             <EditProfile setShowModal={setShowModal}/>
           </Modal>

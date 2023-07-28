@@ -1,14 +1,18 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
 
+import Modal from "../Modal/Modal";
 import classes from "./EditProfile.module.css";
 import { BASE_URL, updateProfile } from "../../api/api";
 import AuthContext from "../../context/auth-context";
 import coverPlaceholder from "../../assets/cover-placeholder.jpg";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
 
+
 const EditProfile = (props) => {
   const profileImageRef = useRef();
   const coverImageRef = useRef();
+  const [error, setError] = useState(null);
 
   const authCtx = useContext(AuthContext);
 
@@ -51,37 +55,53 @@ const EditProfile = (props) => {
     formData.append("location", form.elements[3].value);
     formData.append("occupation", form.elements[4].value);
 
-    await updateProfile(formData);
-    await authCtx.updateCurrentUser();
+    try {
+      await updateProfile(formData);
+      await authCtx.updateCurrentUser();
+    } catch (error) {
+      setError(error);
+    }
     props.setShowModal(false);
   };
 
   return (
-    <div className={classes["edit-profile"]}>
-      <form onSubmit={submitHandler} name="editProfileForm">
-        <h2 className="fs-6">Profile Picture</h2>
-        <input type="file" id="profile-pic" onChange={fileChangeHandler} />
-        <label htmlFor="profile-pic">
-          <i className="bi bi-pencil-square"></i>
-        </label>
-        <img src={profilePlaceholder} alt="" ref={profileImageRef} />
+    <>
+      <div className={classes["edit-profile"]}>
+        <form onSubmit={submitHandler} name="editProfileForm">
+          <h2 className="fs-6">Profile Picture</h2>
+          <input type="file" id="profile-pic" onChange={fileChangeHandler} />
+          <label htmlFor="profile-pic">
+            <i className="bi bi-pencil-square cursor"></i>
+          </label>
+          <img src={profilePlaceholder} alt="" ref={profileImageRef} />
 
-        <h2 className="fs-6">Cover Photo</h2>
-        <input type="file" id="cover-pic" onChange={fileChangeHandler} />
-        <label htmlFor="cover-pic">
-          <i className="bi bi-pencil-square"></i>
-        </label>
-        <img src={coverPlaceholder} alt="" ref={coverImageRef} />
+          <h2 className="fs-6">Cover Photo</h2>
+          <input type="file" id="cover-pic" onChange={fileChangeHandler} />
+          <label htmlFor="cover-pic">
+            <i className="bi bi-pencil-square cursor"></i>
+          </label>
+          <img src={coverPlaceholder} alt="" ref={coverImageRef} />
 
-        <h2 className="fs-6">Other Info</h2>
-        <input type="text" placeholder="Username" className="p-2 ps-4" />
-        <input type="text" placeholder="Location" className="p-2 ps-4" />
-        <input type="text" placeholder="Occupation" className="p-2 ps-4" />
-        <button type="submit" className="px-5 py-1 my-3 border-0">
-          Update
-        </button>
-      </form>
-    </div>
+          <h2 className="fs-6">Other Info</h2>
+          <input type="text" placeholder="Username" className="p-2 ps-4" />
+          <input type="text" placeholder="Location" className="p-2 ps-4" />
+          <input type="text" placeholder="Occupation" className="p-2 ps-4" />
+          <button type="submit" className="px-5 py-1 my-3 border-0">
+            Update
+          </button>
+        </form>
+      </div>
+      {ReactDOM.createPortal(
+        <Modal
+          showModal={!!error}
+          setShowModal={setError}
+          title="An error occured"
+        >
+          <p>{error?.message}</p>
+        </Modal>,
+        document.getElementById("root")
+      )}
+    </>
   );
 };
 

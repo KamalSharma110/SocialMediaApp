@@ -1,8 +1,12 @@
 .friends-container{
-    background-color: white;
+    background-color: var(--clr-foreground);
     border-radius: 10px;
     position: sticky;
     top: 96px;
+}
+
+.friends-container h4{
+    color: var(--clr-text-primary);
 }
 
 .friends-container ul{

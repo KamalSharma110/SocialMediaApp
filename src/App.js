@@ -5,7 +5,6 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 
-import "./App.css";
 import AuthPage from "./pages/AuthPage";
 import AuthContext from "./context/auth-context";
 import { getExpirationTime } from "./api/utils";

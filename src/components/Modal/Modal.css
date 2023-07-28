@@ -1,32 +1,65 @@
 .modals {
-  height: 626px;
   width: 35vw;
-  background-color: white;
+  background-color: var(--clr-foreground);
   position: fixed;
   z-index: 100;
   margin: auto;
   inset: 0;
   border-radius: 10px;
   box-shadow: 0 0 8px -3px #0000006e;
+  overflow: hidden;
 }
 
 .modals * {
   display: none;
 }
 
-.modals-enter-active {
-  animation: modals-anim 400ms linear; /*here fill mode is none which is the default value*/
+.modals > p{
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
 }
 
-.modals-enter-done *{
+.modals > div:first-child {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border-bottom: 1px solid var(--clr-background);
+}
+
+.modals h2 + i{
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  justify-self: end;
+  color: var(--clr-text-secondary);
+}
+
+.modals h2:has(+ i){
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+  justify-self: center;
+}
+
+.modals :where(button, i){
+  cursor: pointer;
+}
+
+.edit-modal-enter-active {
+  animation: edit-modal-anim 400ms linear; /*here fill mode is none which is the default value*/
+}
+
+.edit-modal-enter-done *{
   display: unset;
 }
 
-.modals-exit-active {
-  animation: modals-anim 400ms linear reverse forwards;
+.edit-modal-exit-active {
+  animation: edit-modal-anim 400ms linear reverse forwards;
 }
 
-@keyframes modals-anim {
+@keyframes edit-modal-anim {
   0% {
     height: 50px;
     width: 0vw;
@@ -41,26 +74,25 @@
   }
 }
 
-.modals > div:first-child {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  border-bottom: 1px solid lightgray;
+.error-modal-enter-active{
+  animation: error-modal-anim linear 150ms;
 }
 
-.modals h2 + i{
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  justify-self: end;
-  color: #757675;
+.error-modal-enter-done *{
+  display: unset;
 }
 
-.modals h2:has(+ i){
-  grid-column: 1 / -1;
-  grid-row: 1 / 2;
-  justify-self: center;
+.error-modal-exit-active{
+  animation: error-modal-anim linear reverse forwards 150ms;
 }
 
-.modals :where(button, i){
-  cursor: pointer;
+@keyframes error-modal-anim {
+  from{
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

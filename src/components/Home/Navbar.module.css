@@ -1,5 +1,5 @@
 .navbar {
-  background-color: white;
+  background-color: var(--clr-foreground);
   padding: 12px 90px;
   position: sticky;
   top: 0;
@@ -15,36 +15,31 @@
       gap: 1.8em;
 
       & > a {
-        color: #0cd0f8;
+        color: var(--clr-btn-primary);
         text-decoration: none;
         transition: all 0.2s;
 
         &:hover {
-          color: #0bc1e6;
+          color: var(--clr-btn-primary-dark);
         }
       }
     }
   }
   & i {
     font-size: 1.2rem;
-    color: #333;
+    color: var(--clr-text-primary);
   }
+  
+
   & :where(input, button) {
     outline: none;
     border: none;
     background-color: transparent;
   }
-  & select {
-    outline: none;
-    border: none;
-    padding: 7px 8px;
-    background: #f4f3f4;
-    border-radius: 7px;
-  }
   & div:has(> input) {
     display: flex;
     align-items: center;
-    background-color: #f4f3f4;
+    background-color: var(--clr-background);
     padding: 3px 28px;
     border-radius: 7px;
     font-size: 0.9rem;
