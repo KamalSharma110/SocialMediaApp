@@ -9,6 +9,9 @@ import classes from "./Friend.module.css";
 import AuthContext from "../../context/auth-context";
 import FriendsContext from "../../context/friends-context";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
+import { socket } from "../../App";
+import Image from "../Image/Image";
+
 
 
 const Friend = (props) => {
@@ -28,14 +31,20 @@ const Friend = (props) => {
     else isFriend = false;
   }
 
+  socket.on('add_friend', ({id: friendId, username, profileImage}) => {
+    frCtx.addFriend(friendId, username, profileImage);
+  });
+
+  socket.on('remove_friend', ({id: friendId}) => {
+    frCtx.removeFriend(friendId);
+  });
+
   const clickHandler = async () => {
     try {
       if (isFriend) {
         await removeFriend({ currentUserId, friendId });
-        frCtx.removeFriend(friendId);
       } else {
         await addFriend({ currentUserId, friendId });
-        frCtx.addFriend(friendId, username, userImage);
       }
     } catch (error) {
       setError(error);
@@ -45,11 +54,10 @@ const Friend = (props) => {
   return (
     <>
       <div className={classes.friend + " mb-3"}>
-        <img
+        <Image
           src={userImage ? BASE_URL + "/" + userImage : profilePlaceholder}
-          alt=""
         />
-        <div className="ms-2">
+        <div>
           <Link to={`/home/profile/${friendId}`}>{username}</Link>
           {createdAt && <Moment fromNow>{createdAt}</Moment>}
         </div>

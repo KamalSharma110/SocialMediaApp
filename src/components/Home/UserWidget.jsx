@@ -9,6 +9,7 @@ import AuthContext from "../../context/auth-context";
 import { BASE_URL } from "../../api/api";
 import FriendsContext from "../../context/friends-context";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
+import Image from "../Image/Image";
 
 
 const UserWidget = () => {
@@ -19,8 +20,8 @@ const UserWidget = () => {
 
   return (
     <>
-      <div className={classes["user-widget"] + " px-4 py-3"}>
-        <img src={profileImage ? BASE_URL + "/" + profileImage : profilePlaceholder} alt="" />
+      <div className={classes["user-widget"] + " px-3 py-2 px-xl-4 py-xl-3 col-12 col-lg-3 mb-4"}>
+        <Image src={profileImage ? BASE_URL + "/" + profileImage : profilePlaceholder} />
         <Link to={`/home/profile/${id}`}>{username}</Link>
         <i className="bi bi-person-gear cursor" onClick={() => setShowModal(true)}></i>
         <h6>{frCtx.friends.length + " friends"}</h6>

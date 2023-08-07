@@ -71,6 +71,24 @@ i.cursor:hover::after{
   scale: 2;
 }
 
-.cursor{
+.cursor , img{
   cursor: pointer;
+}
+
+@media (max-width: 1300px){
+  html{
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 992px){
+  html{
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 576px){
+  html{
+    font-size: 13.5px;
+  }
 }

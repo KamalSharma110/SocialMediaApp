@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import Modal from "../Modal/Modal";
@@ -7,6 +7,8 @@ import AuthContext from "../../context/auth-context";
 import { BASE_URL, createPost, getPosts } from "../../api/api";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
 import PostsContext from "../../context/posts-context";
+import { socket } from "../../App";
+import Image from "../Image/Image";
 
 const CreatePost = () => {
   const [showSelector, setShowSelector] = useState(false);
@@ -18,6 +20,16 @@ const CreatePost = () => {
 
   const profileImage = authCtx.currentUser.profileImage;
   let { setPosts } = postCtx;
+
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+
+
+  socket?.on('post_added', async() => {
+    const response = await getPosts();
+    setPosts(response.posts);
+  });
 
   const fileChangeHandler = (e) => {
     setInputs((prevState) => {
@@ -48,8 +60,6 @@ const CreatePost = () => {
 
     try {
       await createPost(formData);
-      const response = await getPosts();
-      setPosts(response.posts);
     } catch (err) {
       setError(err);
     }
@@ -61,16 +71,15 @@ const CreatePost = () => {
 
   return (
     <>
-      <div className={classes["create-post"] + " px-4 py-3 mb-4"}>
+      <div className={classes["create-post"] + " px-xl-4 py-xl-3 px-3 py-2 mb-4"} >
         <form onSubmit={submitHandler}>
           <div className="pb-3 border-bottom border-1">
-            <img
+            <Image
               src={
                 profileImage
                   ? BASE_URL + "/" + profileImage
                   : profilePlaceholder
               }
-              alt="user-pic"
             />
             <input
               type="text"

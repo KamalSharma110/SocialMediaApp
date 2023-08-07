@@ -9,10 +9,11 @@ import Comment from "./Comment";
 import AuthContext from "../../context/auth-context";
 import { BASE_URL, addComment, getComments } from "../../api/api";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
+import Image from "../Image/Image";
 
 const Comments = ({ postId, setStats, inProp }) => {
-  const inputRef = useRef();
   const nodeRef = useRef();
+  const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const authCtx = useContext(AuthContext);
@@ -36,12 +37,12 @@ const Comments = ({ postId, setStats, inProp }) => {
     e.preventDefault();
 
     const commentData = {
-      text: inputRef.current.value,
+      text: comment,
     };
 
-    try{
+    try {
       await addComment(postId, commentData);
-    }catch(err){
+    } catch (err) {
       setError(err);
     }
 
@@ -51,7 +52,7 @@ const Comments = ({ postId, setStats, inProp }) => {
           ...commentData,
           _id: uuid(),
           username: authCtx.currentUser.username,
-          userImage: authCtx.currentUser.profileImage
+          userImage: authCtx.currentUser.profileImage,
         },
         ...prevComments,
       ];
@@ -61,7 +62,7 @@ const Comments = ({ postId, setStats, inProp }) => {
       return { ...prevState, comments: prevState.comments + 1 };
     });
 
-    inputRef.current.value = "";
+    setComment("");
   };
 
   return (
@@ -76,21 +77,25 @@ const Comments = ({ postId, setStats, inProp }) => {
       >
         <div className="comments mt-3" ref={nodeRef}>
           <form className="mb-3" onSubmit={submitHandler}>
-            <img
+            <Image
               src={
                 profileImage
                   ? BASE_URL + "/" + profileImage
                   : profilePlaceholder
               }
-              alt="current_user_profile_picture"
             />
             <input
               type="text"
               placeholder="Add a comment..."
               className="rounded-pill ps-3"
-              ref={inputRef}
+              onChange={e => setComment(e.target.value)}
+              value={comment}
             />
-            <button type="submit" className="rounded border-0">
+            <button
+              type="submit"
+              className="rounded border-0"
+              disabled={comment === ""}
+            >
               Send
             </button>
           </form>

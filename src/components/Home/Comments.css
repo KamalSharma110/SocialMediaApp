@@ -30,34 +30,42 @@
 }
 
 .comments form button {
-  background-color: var(--clr-btn-secondary);
-  color: white;
   padding: 5px 10px;
   transition: all 0.2s;
-}
 
-.comments form button:hover {
-  background-color: var(--clr-btn-secondary-dark);
+  &:enabled{
+    background-color: var(--clr-btn-secondary);
+    color: white;
+    cursor: pointer;
+
+    &:hover{
+      background-color: var(--clr-btn-secondary-dark);
+    }
+  }
+
+  &:disabled{
+    cursor: not-allowed;
+  }
 }
 
 .comment-enter {
-  height: 0px;
+  max-height: 0px;
 }
 
 .comment-enter-active {
-  height: 165px;
-  transition: height 0.2s linear;
+  max-height: 165px;
+  transition: max-height 0.2s linear;
 }
 
 .comment-enter-done {
-  height: 165px;
+  max-height: 165px;
 }
 
 .comment-exit {
-  height: 165px;
+  max-height: 165px;
 }
 
 .comment-exit-active {
-  height: 0px;
-  transition: height 0.2s linear;
+  max-height: 0px;
+  transition: max-height 0.2s linear;
 }

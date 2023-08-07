@@ -40,7 +40,7 @@ const Navbar = () => {
         }
       })();
     }
-  }, [userId, isLoggedIn, setPosts]);
+  }, [userId, isLoggedIn, darkMode, setPosts]);
 
   const submitHandler = async () => {
     try {
@@ -65,23 +65,22 @@ const Navbar = () => {
 
   const toggleDarkMode = (prevTheme = undefined) => {
     const root = document.getElementById("root");
-    let darkMode;
+    const result = root.classList.toggle('darkmode', prevTheme);
+    localStorage.setItem("DarkMode", result);
+    setDarkMode(result);
+  };
 
-    if (prevTheme !== undefined) darkMode = !prevTheme;
-    else darkMode = JSON.parse(localStorage.getItem("DarkMode") || "false");
-
-    root.className = darkMode ? "" : "darkmode";
-    localStorage.setItem("DarkMode", !darkMode);
-    setDarkMode(!darkMode);
+  const toggleMenu = () => {
+    document.querySelector('nav > div:nth-of-type(2)').classList.toggle(classes['d-flex']);
   };
 
   return (
     <>
-      <header className={classes.navbar + " mb-4"}>
-        <nav>
+      <header className={classes.navbar + " mb-4 g-0 row"}>
+        <nav className="col-12 m-auto">
           <div>
             <Link to="/home" className="fs-2 fw-bold mb-0">
-              Sociopedia
+              Connectify
             </Link>
             <div>
               <input
@@ -98,7 +97,9 @@ const Navbar = () => {
               </button>
             </div>
           </div>
+          <i className="bi bi-list cursor" onClick={toggleMenu}></i>
           <div>
+            <i className="bi bi-x cursor" onClick={toggleMenu}></i>
             <i
               className={`bi bi-${isDarkMode ? "sun" : "moon-stars"}-fill cursor`}
               onClick={() => toggleDarkMode()}
@@ -117,9 +118,9 @@ const Navbar = () => {
               </button>
               <ul className="dropdown-menu bg-secondary-subtle">
                 <li>
-                  <a className="dropdown-item" href="/">
+                  <Link className="dropdown-item" to={`/home/profile/${authCtx.currentUser.id}`}>
                     {authCtx.currentUser.username}
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a

@@ -2,7 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import ReactDOM from "react-dom";
 
 import Modal from "../Modal/Modal";
-import classes from "./EditProfile.module.css";
+import "./EditProfile.css";
 import { BASE_URL, updateProfile } from "../../api/api";
 import AuthContext from "../../context/auth-context";
 import coverPlaceholder from "../../assets/cover-placeholder.jpg";
@@ -66,7 +66,7 @@ const EditProfile = (props) => {
 
   return (
     <>
-      <div className={classes["edit-profile"]}>
+      <div className="edit-profile">
         <form onSubmit={submitHandler} name="editProfileForm">
           <h2 className="fs-6">Profile Picture</h2>
           <input type="file" id="profile-pic" onChange={fileChangeHandler} />
@@ -83,9 +83,9 @@ const EditProfile = (props) => {
           <img src={coverPlaceholder} alt="" ref={coverImageRef} />
 
           <h2 className="fs-6">Other Info</h2>
-          <input type="text" placeholder="Username" className="p-2 ps-4" />
-          <input type="text" placeholder="Location" className="p-2 ps-4" />
-          <input type="text" placeholder="Occupation" className="p-2 ps-4" />
+          <input type="text" placeholder="Username" className="p-1 ps-3 p-sm-2 ps-sm-4" />
+          <input type="text" placeholder="Location" className="p-1 ps-3 p-sm-2 ps-sm-4" />
+          <input type="text" placeholder="Occupation" className="p-1 ps-3 p-sm-2 ps-sm-4" />
           <button type="submit" className="px-5 py-1 my-3 border-0">
             Update
           </button>

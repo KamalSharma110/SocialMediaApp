@@ -1,13 +1,19 @@
 .navbar {
   background-color: var(--clr-foreground);
-  padding: 12px 90px;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1;
+  padding-block: 1em;
 
   & nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 88vw;
+
+    & > i {
+      display: none;
+    }
 
     & > div {
       display: flex;
@@ -24,12 +30,19 @@
         }
       }
     }
+
+    & > div:nth-of-type(2) {
+      display: flex;
+
+      & > i:nth-child(1) {
+        display: none;
+      }
+    }
   }
   & i {
     font-size: 1.2rem;
     color: var(--clr-text-primary);
   }
-  
 
   & :where(input, button) {
     outline: none;
@@ -40,8 +53,42 @@
     display: flex;
     align-items: center;
     background-color: var(--clr-background);
-    padding: 3px 28px;
+    padding: calc(0.21em - 1.3px) calc(1.94em - 12px);
     border-radius: 7px;
     font-size: 0.9rem;
   }
 }
+
+.navbar nav > div:nth-of-type(2).d-flex {
+  display: flex;
+}
+
+@media (max-width: 1300px) {
+  .navbar nav {
+    width: 92vw;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar nav > div:nth-of-type(2) {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    padding: 1em;
+    background-color: var(--clr-foreground);
+  }
+
+  .navbar nav > i {
+    display: inline;
+    font-size: 1.5rem;
+  }
+
+  .navbar nav > div:nth-of-type(2) > i:nth-child(1) {
+    display: inline;
+    font-size: 1.8rem;
+    align-self: flex-end;
+  }
+}
+

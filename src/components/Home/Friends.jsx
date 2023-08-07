@@ -9,7 +9,7 @@ const Friends = () => {
   const frCtx = useContext(FriendsContext);
 
   return (
-    <div className="friends-container px-4 py-3">
+    <div className="friends-container px-3 py-2 px-xl-4 py-xl-3 col-12 col-lg-3 mb-4">
       <h4 className="fs-6 mb-3">Friends List</h4>
       <TransitionGroup component='ul'>
         {frCtx.friends.map((friend) => (

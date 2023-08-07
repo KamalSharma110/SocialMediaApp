@@ -2,10 +2,10 @@ import classes from "./Backdrop.module.css";
 
 const Backdrop = props => {
   return (
-    <div
+    <section
       className={classes.backdrop}
-      onClick={() => props.setShowModal(false)}
-    ></div>
+      onClick={() => props.showContent(false)}
+    ></section>
   );
 };
 

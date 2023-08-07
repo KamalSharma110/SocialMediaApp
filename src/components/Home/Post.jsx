@@ -7,6 +7,7 @@ import Friend from "./Friend";
 import "./Post.css";
 import AuthContext from "../../context/auth-context";
 import Comments from "./Comments";
+import Image from "../Image/Image";
 
 const Post = ({
   userImage,
@@ -32,7 +33,7 @@ const Post = ({
           likes: response.totalLikes,
           comments: response.totalComments,
         });
-        const index = response.users.findIndex(
+        const index = response.likeUsers.findIndex(
           (user) => user === authCtx.currentUser.id
         );
         if (index >= 0) setLiked(true);
@@ -68,7 +69,7 @@ const Post = ({
 
   return (
     <>
-      <div className="post px-4 py-3 mb-4">
+      <div className="post px-xl-4 py-xl-3 px-3 py-2 mb-4">
         <Friend
           username={username}
           userImage={userImage}
@@ -77,7 +78,7 @@ const Post = ({
         />
         <p className="mb-3">{postText}</p>
         {postImage && (
-          <img src={BASE_URL + "/" + postImage} alt="" className="mb-3" />
+          <Image src={BASE_URL + "/" + postImage} className="mb-3" />
         )}
         <div>
           <i

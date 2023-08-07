@@ -47,6 +47,7 @@ const AuthForm = () => {
         body.name = nameRef.current.value;
         body.email = emailRef.current.value;
         await signup(body);
+        setShowLogin(true);
       }
     } catch (err) {
       setError(err);
@@ -54,9 +55,9 @@ const AuthForm = () => {
   };
 
   return (
-    <section className={styles["auth-background"]}>
-      <div className={styles["auth-form"]}>
-        <div>
+    <section className={styles["auth-background"] + ' row g-0 align-items-center justify-content-center'}>
+      <div className={styles["auth-form"] + ' row g-0 col-12'}>
+        <div className="col-md-6 col-12">
           <h1>{showLogin ? "Login" : "Register"}</h1>
           <form
             method="post"
@@ -90,13 +91,10 @@ const AuthForm = () => {
             <button type="submit">{showLogin ? "Login" : "Register"}</button>
           </form>
         </div>
-        <div className={classes}>
-          <h1>Sociopedia</h1>
+        <div className={classes + ' col-md-6 col-12'}>
+          <h1>Connectify</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem
-            alias debitis magnam illum vel facere iste aspernatur. Error quia,
-            dolores, ratione assumenda laborum quos harum blanditiis fugit
-            fugiat incidunt facilis.
+          Welcome to Connectify - where connections thrive and stories unite. Join a vibrant community of like-minded individuals, sharing moments, ideas, and experiences. Your journey begins here.
           </p>
           <p>
             {showLogin ? "Don't have an account?" : "Do you have an account?"}

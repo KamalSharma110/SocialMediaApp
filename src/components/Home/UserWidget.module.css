@@ -4,13 +4,14 @@
     grid-template-rows: repeat(2, auto) repeat(10, 31px);
     background-color: var(--clr-foreground);
     border-radius: 10px;
+    top: 104px;
     position: sticky;
-    top: 96px;
+    align-items: center;
 }
 
 .user-widget img{
-    width: 50px;
-    height: 50px;
+    width: 3.125rem;
+    height: 3.125rem;
     border-radius: 50%;
     object-fit: cover;
     grid-row: span 2;
@@ -86,4 +87,23 @@
 
 .user-widget span:not(:nth-of-type(4), :nth-of-type(6)){
     grid-column: span 2;
+}
+
+@media (max-width: 992px) {
+    .user-widget{
+        grid-template-columns: 3% 77% 20%;
+        position: static;
+    }
+}
+
+@media (max-width: 992px) {
+    .user-widget{
+        grid-template-columns: 4% 76% 20%;
+    }
+}
+
+@media (max-width: 576px) {
+    .user-widget{
+        grid-template-columns: 6% 74% 20%;
+    }
 }

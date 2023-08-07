@@ -1,6 +1,10 @@
+.edit-profile {
+    overflow: hidden;
+}
+
 .edit-profile form{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 0.1fr 1fr;
     row-gap: 1em;
 }
 
@@ -20,20 +24,18 @@
     justify-self: end;
 }
 
-.edit-profile input{
-    grid-column: 1 / span 1;
-}
-
 .edit-profile input[placeholder="Location"] {
     grid-column: -1 / -2;
 }
 
-.edit-profile input{
+.edit-profile input {
+    grid-column: 1 / span 1;
     outline: none;
     border: none;
     background-color: var(--clr-background);
-    font-size: .9rem;
+    font-size: 0.8rem;
     border-radius: 5px;
+    width: 100%;
 }
 
 .edit-profile button {

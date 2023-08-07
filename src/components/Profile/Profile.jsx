@@ -9,6 +9,8 @@ import coverPlaceholder from "../../assets/cover-placeholder.jpg";
 import profilePlaceholder from "../../assets/profile-placeholder.png";
 import FriendsContext from "../../context/friends-context";
 import AuthContext from "../../context/auth-context";
+import { socket } from "../../App";
+import Image from "../Image/Image";
 
 const Profile = () => {
   const params = useParams();
@@ -24,6 +26,7 @@ const Profile = () => {
   const isFriend = !!frCtx.friends.find((f) => f.friendId === userId);
 
   useEffect(() => {
+    window.scroll(0, 0);
     (async () => {
       try {
         const response = await getProfile(userId);
@@ -34,14 +37,20 @@ const Profile = () => {
     })();
   }, [userId]);
 
+  socket?.on("add_friend", ({ id: friendId, username, profileImage }) => {
+    frCtx.addFriend(friendId, username, profileImage);
+  });
+
+  socket?.on("remove_friend", ({ id: friendId }) => {
+    frCtx.removeFriend(friendId);
+  });
+
   const clickHandler = async () => {
     try {
       if (isFriend) {
-        removeFriend({ currentUserId, userId });
-        frCtx.removeFriend(userId);
+        removeFriend({ currentUserId, friendId: userId });
       } else {
-        await addFriend({ currentUserId, userId });
-        frCtx.addFriend(userId, profile.username, profile.profileImage);
+        await addFriend({ currentUserId, friendId: userId });
       }
     } catch (error) {
       setError(error);
@@ -51,25 +60,23 @@ const Profile = () => {
   return (
     <>
       <div className={classes.profile + " mb-4"}>
-        <img
+        <Image
           className="img-fluid"
-          alt="cover-pic"
           src={
             profile?.coverImage
               ? BASE_URL + "/" + profile?.coverImage
               : coverPlaceholder
           }
         />
+        <Image
+          className={"img-thumbnail " + classes.thumbnail}
+          src={
+            profile?.profileImage
+              ? BASE_URL + "/" + profile?.profileImage
+              : profilePlaceholder
+          }
+        />
         <div className="px-4 py-3">
-          <img
-            className="img-thumbnail"
-            src={
-              profile?.profileImage
-                ? BASE_URL + "/" + profile?.profileImage
-                : profilePlaceholder
-            }
-            alt="profile-pic"
-          />
           <h4>{profile?.username}</h4>
           <div>
             <div>

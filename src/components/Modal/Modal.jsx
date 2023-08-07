@@ -9,7 +9,7 @@ const Modal = (props) => {
 
   return (
     <>
-      {props.showModal && <Backdrop setShowModal={props.setShowModal} />}
+      {props.showModal && <Backdrop showContent={props.setShowModal} />}
       <CSSTransition
         timeout={400}
         in={props.showModal}
@@ -19,9 +19,9 @@ const Modal = (props) => {
         unmountOnExit
       >
         <div
-          className="modals px-4 py-3 pt-0"
+          className="modals pt-xl-0 px-xl-4 py-xl-3 px-3 py-2 pt-0"
           ref={nodeRef}
-          style={{ height: props.isEditModal ? "626px" : "200px" }}
+          style={{ height: props.isEditModal ? "auto" : "200px" }}
         >
           <div className="mb-3">
             <h2 className="mb-0 fs-5">{props.title}</h2>

@@ -31,7 +31,7 @@ export const FriendsContextProvider = (props) => {
 
   const removeFriend = (id) => {
     const updatedFriends = friends.filter((friend) => friend.friendId !== id);
-    setFriends(updatedFriends);
+    setFriends([...updatedFriends]);
   };
 
   const addFriend = (id, username, image) => {

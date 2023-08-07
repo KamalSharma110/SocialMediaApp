@@ -1,113 +1,128 @@
-.auth-background{
-    background-color: var(--clr-background);
-    position: relative;
-    height: 757px;
+.auth-background {
+  height: 100vh;
 }
 
-.auth-form{
-    width: min(90vw, 900px);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border-radius: 10px;
-    display: flex;
-    height: 470px;
-    justify-content: space-between;
-    overflow: hidden;
+.auth-form {
+  width: min(98vw, 900px);
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px -9px #0000004d;
 }
 
-.auth-form>div:nth-child(1){
-    padding: 40px;
-    padding-bottom: 0;
-    width: 100%;
-    color: #333333c9;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.auth-form > div:nth-child(1) {
+  padding: 2.5em;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.auth-form>div:nth-child(1) h1{
-    font-size: 25px;
+.auth-form > div:nth-child(1) h1 {
+  font-size: 1.56rem;
 }
 
-.auth-form>div:nth-child(1) *{
-    margin-bottom: 32px;
+.auth-form > div:nth-child(1) :where(button, form, input, h1){
+  margin-bottom: 2rem;
 }
 
-.auth-form form{
-    display: flex;
-    flex-direction: column;
+.auth-form form {
+  display: flex;
+  flex-direction: column;
 }
 
-.auth-form form input{
-    padding: 5px 5px 10px 5px;
-    border: none;
-    border-bottom: 2px solid #b9b5b526;
-    outline: none;
+.auth-form form input {
+  padding: 0.3125em 0.3125em 0.625em 0.3125em;
+  border: none;
+  border-bottom: 2px solid #b9b5b526;
+  outline: none;
 }
 
-.auth-form__img{
-    width: 100%;
-    background-image: linear-gradient(#5971fb2b, #5971fb2b), url('https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=600');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+.auth-form__img {
+  background-image: linear-gradient(#5971fb2b, #5971fb2b),
+    url("https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=600");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  padding: 2.5em;
+}
+
+.auth-form__img h1 {
+  font-size: 4.125rem;
+}
+
+.auth-form__img * {
+  margin-bottom: 1.75em;
+}
+
+.auth-form button {
+  border: none;
+  background: none;
+  width: 50%;
+  font-weight: bold;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.auth-form > div:nth-child(1) button {
+  background-color: var(--clr-btn-secondary);
+  color: white;
+
+  &:hover {
+    background-color: var(--clr-btn-secondary-dark);
+  }
+}
+
+.auth-form__img button {
+  background-color: white;
+  color: var(--clr-btn-secondary);
+
+  &:hover {
     color: white;
-    padding: 40px;
-}
-
-.auth-form__img h1{
-    font-size: 66px;
-}
-
-.auth-form__img *{
-    margin-bottom: 28px;
-}
-
-.auth-form button{
-    border: none;
-    background: none;
-    width: 50%;
-    font-weight: bold;
-    padding: 7px;
-    cursor: pointer;
-}
-
-.auth-form>div:nth-child(1) button{
     background-color: var(--clr-btn-secondary);
-    color: white;
-
-    &:hover{
-        background-color: var(--clr-btn-secondary-dark);
-    }
+  }
 }
 
-.auth-form__img button{
-    background-color: white;
-    color: var(--clr-btn-secondary);
-
-    &:hover{
-        color: white;
-        background-color: var(--clr-btn-secondary);
-    }
+.auth-form__img--change-order {
+  order: -1;
 }
 
-.auth-form__img--change-order{
-    order: -1;
+.auth-form__img--change-img {
+  background-image: linear-gradient(#5971fb2b, #5971fb2b),
+    url("https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600");
 }
 
-.auth-form__img--change-img{
-    background-image: linear-gradient(#5971fb2b, #5971fb2b), url('https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600');
-}
-
-.auth-form .error{
-    font-size: 11px;
-    margin-top: -31px;
-    color: indianred;
+.auth-form .error {
+  font-size: 0.68rem;
+  margin-top: -1.95em;
+  color: indianred;
 }
 
 .auth-form input:has(+ .error) {
-    border-bottom-color: indianred;
+  border-bottom-color: indianred;
+}
+
+@media (max-width: 768px) {
+  .auth-form {
+    width: 57vw;
+  }
+
+  .auth-form__img * {
+    margin-bottom: 0.5em;
+  }
+
+  .auth-form > div:nth-child(1),
+  .auth-form__img {
+    padding: 1.5em;
+  }
+
+  .auth-form > div:nth-child(1) :where(button, form) {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .auth-form {
+    width: 90vw;
+  }
 }

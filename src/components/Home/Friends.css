@@ -1,8 +1,8 @@
 .friends-container{
     background-color: var(--clr-foreground);
     border-radius: 10px;
+    top: 104px;
     position: sticky;
-    top: 96px;
 }
 
 .friends-container h4{
@@ -39,4 +39,10 @@
     transform: translateX(100%);
     opacity: 0;
     transition: all .3s;
+}
+
+@media (max-width: 992px) {
+    .friends-container {
+        position: static;
+    }
 }

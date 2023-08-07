@@ -1,14 +1,9 @@
 .root{
-    display: flex;
-    padding-inline: 90px;
-    align-items: flex-start;
-    column-gap: 3em;
+    width: 88vw;
 }
 
-.root > div{
-    flex-basis: 345px;
-}
-
-.root > div:nth-child(2){
-    flex-grow: 1;
+@media (max-width: 1300px) {
+    .root{
+        width: 92vw;
+    }
 }

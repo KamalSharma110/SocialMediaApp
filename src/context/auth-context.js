@@ -38,7 +38,7 @@ export const AuthContextProvider = (props) => {
 
   const logout = () => {
     localStorage.removeItem("currentUserInfo");
-    setCurrentUserInfo(null);
+    setCurrentUserInfo({});
   };
 
   const updateCurrentUser = async () => {
