@@ -96,11 +96,9 @@ const Profile = () => {
               <i className="bi bi-three-dots-vertical"></i>
             </div>
           </div>
-          {currentUserId !== userId && (
-            <button onClick={clickHandler}>
-              {isFriend ? "- Remove Friend" : "+ Add Friend"}
-            </button>
-          )}
+          <button onClick={clickHandler} disabled={currentUserId === userId ? true : false}>
+            {isFriend ? "- Remove Friend" : "+ Add Friend"}
+          </button>
         </div>
       </div>
       {ReactDOM.createPortal(

@@ -8,7 +8,7 @@ import { io } from "socket.io-client";
 
 import AuthPage from "./pages/AuthPage";
 import AuthContext from "./context/auth-context";
-// import { getExpirationTime } from "./api/utils";
+import { getExpirationTime } from "./api/utils";
 import HomePage from "./pages/HomePage";
 import Root from "./pages/Root";
 import ProfilePage from "./pages/ProfilePage";
@@ -25,12 +25,12 @@ function App() {
       socket = io("http://localhost:8080", { autoConnect: false });
       socket.connect();
       socket.emit('store_user', { userId: id });
-      // const expirationTime = getExpirationTime();
+      const expirationTime = getExpirationTime();
 
-      // if (expirationTime <= 0) authCtx.logout();
-      // else setTimeout(() => authCtx.logout(), expirationTime);
+      if (expirationTime <= 0) authCtx.logout();
+      else setTimeout(() => authCtx.logout(), expirationTime);
     }
-  }, [isLoggedIn, id]);
+  }, [isLoggedIn, id, authCtx]);
 
   const router = createBrowserRouter([
     { 
