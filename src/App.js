@@ -2,7 +2,7 @@ import { useEffect, useContext } from "react";
 import {
   Navigate,
   RouterProvider,
-  createBrowserRouter,
+  createHashRouter,
 } from "react-router-dom";
 import { io } from "socket.io-client";
 
@@ -32,7 +32,7 @@ function App() {
     }
   }, [isLoggedIn, id, authCtx]);
 
-  const router = createBrowserRouter([
+  const router = createHashRouter([
     { 
       path: "/",
       children: [

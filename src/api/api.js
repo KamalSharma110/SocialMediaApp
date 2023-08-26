@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:8080';
+export const BASE_URL = 'https://socialmediaapp-backend-production.up.railway.app';
 
 const getToken = () => {
   const currentUserInfo = localStorage.getItem("currentUserInfo");

@@ -31,11 +31,11 @@ const Friend = (props) => {
     else isFriend = false;
   }
 
-  socket.on('add_friend', ({id: friendId, username, profileImage}) => {
+  socket?.on('add_friend', ({id: friendId, username, profileImage}) => {
     frCtx.addFriend(friendId, username, profileImage);
   });
 
-  socket.on('remove_friend', ({id: friendId}) => {
+  socket?.on('remove_friend', ({id: friendId}) => {
     frCtx.removeFriend(friendId);
   });
 
