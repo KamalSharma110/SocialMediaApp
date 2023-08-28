@@ -12,6 +12,7 @@ import { getExpirationTime } from "./api/utils";
 import HomePage from "./pages/HomePage";
 import Root from "./pages/Root";
 import ProfilePage from "./pages/ProfilePage";
+import { BASE_URL } from "./api/api";
 
 
 export let socket;
@@ -22,7 +23,7 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      socket = io("http://localhost:8080", { autoConnect: false });
+      socket = io(BASE_URL, { autoConnect: false });
       socket.connect();
       socket.emit('store_user', { userId: id });
       const expirationTime = getExpirationTime();

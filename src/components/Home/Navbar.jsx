@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import ReactDOM from "react-dom";
 
 import Modal from "../Modal/Modal";
@@ -13,6 +13,7 @@ const Navbar = () => {
   const darkMode = JSON.parse(localStorage.getItem("DarkMode") || "false");
   const inputRef = useRef();
   const params = useParams();
+  const navigate = useNavigate();
 
   const postCtx = useContext(PostsContext);
   const authCtx = useContext(AuthContext);
@@ -128,6 +129,7 @@ const Navbar = () => {
                     href="/"
                     onClick={(e) => {
                       authCtx.logout();
+                      navigate('/auth');
                     }}
                   >
                     Logout

@@ -46,8 +46,8 @@ const AuthForm = () => {
       } else {
         body.name = nameRef.current.value;
         body.email = emailRef.current.value;
-        await signup(body);
-        setShowLogin(true);
+        signup(body);
+        setShowLogin((prevState) => !prevState);
       }
     } catch (err) {
       setError(err);
